@@ -1,0 +1,27 @@
+{
+  "name": "regApp",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bildsoe/regApp",
+  "authors": [
+    "bildsoe <thomas@bildsoe.dk>"
+  ],
+  "description": "App for the registration of everything",
+  "main": "dist/app.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "CC BY-NC 3.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.4.3",
+    "bootstrap": "~3.3.5",
+    "angular-formly": "~6.18.1",
+    "angular-formly-templates-bootstrap": "~5.0.2"
+  }
+}
