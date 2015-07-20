@@ -3,7 +3,7 @@ var app = express();
 var Sequelize = require('sequelize')
   , sequelize = new Sequelize('regApp', 'postgres', '1234', {
       dialect: 'postgres',
-      port:    5433
+      port:    5432
     });
 
 sequelize
