@@ -8,20 +8,19 @@ var Sequelize = require('sequelize')
 
 sequelize
   .authenticate()
-  .then(function(err) {
+  .then((err) => {
     console.log('Connection has been established successfully.');
-  }, function (err) { 
+  }, (err) => { 
     console.log('Unable to connect to the database:', err);
   });
 
+console.log(__dirname);
 
-app.get('/', (req, res) => {
+app.use(express.static(__dirname + '/public'));
+
+app.get('/test', (req, res) => {
   res.send('hello world');
 });
-
-
-
-
 
 console.log("Server startet on port 3000");
 

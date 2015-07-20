@@ -14,7 +14,11 @@ sequelize.authenticate().then(function (err) {
   console.log('Unable to connect to the database:', err);
 });
 
-app.get('/', function (req, res) {
+console.log(__dirname);
+
+app.use(express['static'](__dirname + '/public'));
+
+app.get('/test', function (req, res) {
   res.send('hello world');
 });
 
