@@ -1,80 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="regApp">
 <head lang="en">
   <meta charset="UTF-8">
-  <title>Quick Example</title>
+  <title>Registration app</title>
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css"/>
+  <link rel="styleSheet" href="vendor/angular-ui-grid/ui-grid.min.css"/>
 </head>
-<body ng-app="app" ng-controller="MainCtrl as vm">
-<div class="jumbotron text-center">
-  <h1>angular-formly-templates-bootstrap</h1>
-</div>
-<div class="container">
-  <div class="row">
-    <formly-form model="vm.model" fields="vm.fields" options="vm.options" form="vm.form"></formly-form>
+<body>
+  <div class="jumbotron text-center">
+    <h1>RegistrationApp</h1>
   </div>
-  <div class="row">
-    <h2>Model</h2>
-    <pre>{{vm.model | json}}</pre>
+
+  <div class="container">
+    <div ng-view></div>
   </div>
-  <div class="row">
-    <h2>Form</h2>
-    <pre>{{vm.form | json}}</pre>
-  </div>
-  <div class="row">
-    <h2>Original Fields</h2>
-    <pre>{{vm.originalFields | json}}</pre>
-  </div>
-  <div class="row">
-    <h2>Options</h2>
-    <pre>{{vm.options}}</pre>
-  </div>
-</div>
 
+  <script src="vendor/api-check/api-check.js"></script>
+  <script src="vendor/angular/angular.min.js"></script>
+  <script src="vendor/angular-route/angular-route.min.js"></script>
+  <script src="vendor/angular-formly/formly.min.js"></script>
+  <script src="vendor/angular-formly-templates-bootstrap/angular-formly-templates-bootstrap.min.js"></script>
+  <script src="vendor/angular-ui-grid/ui-grid.min.js"></script>
 
-<script src="vendor/api-check/api-check.js"></script>
-
-<script src="vendor/angular/angular.min.js"></script>
-<script src="vendor/angular-formly/formly.min.js"></script>
-<script src="vendor/angular-formly-templates-bootstrap/angular-formly-templates-bootstrap.min.js"></script>
-
-<script>
-  var app = angular.module('app', ['formly', 'formlyBootstrap']);
-
-  app.controller('MainCtrl', function MainCtrl() {
-    var vm = this;
-
-    vm.model = {};
-    vm.options = {};
-
-    vm.fields = [
-      {
-        type: 'input',
-        key: 'text',
-        templateOptions: {
-          label: 'First input',
-          placeholder: 'It works!'
-        }
-      },
-      {
-        type: 'select',
-        key: 'avenger',
-        templateOptions: {
-          label: 'Favorite Avenger',
-          options: [
-            {name: 'Iron Man', value: 'iron_man', gender: 'Male'},
-            {name: 'Captain America', value: 'captain_america', gender: 'Male'},
-            {name: 'Black Widow', value: 'black_widow', gender: 'Female'},
-            {name: 'Hulk', value: 'hulk', gender: 'Male'},
-            {name: 'Captain Marvel', value: 'captain_marvel', gender: 'Female'}
-          ],
-          groupProp: 'gender'
-        }
-      }
-    ];
-
-    vm.originalFields = angular.copy(vm.fields);
-  });
-</script>
+  <script src="js/controllers.js"></script>
+  <script src="views/forms.js"></script>
+  <script src="views/registrations.js"></script>
 </body>
 </html>

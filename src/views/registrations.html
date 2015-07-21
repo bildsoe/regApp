@@ -1,0 +1,12 @@
+<style>
+  .myGrid {
+    width: 100%;
+    height: 250px;
+  }
+</style>
+
+<div class="row" ng-controller="GridCtrl as gm">
+  <div id="grid1" ui-grid="{ data: gm.myData }" class="myGrid"></div>
+   <h2>Data</h2>
+  <pre>{{gm.myData | json}}</pre>
+</div>
