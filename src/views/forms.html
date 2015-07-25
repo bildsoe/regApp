@@ -1,5 +1,12 @@
-<div class="row" ng-controller="FormCtrl as vm">
-  <formly-form model="vm.model" fields="vm.fields" form="vm.form"></formly-form>
-  <h2>Model</h2>
-  <pre>{{vm.model | json}}</pre>
+<style>
+  .myGrid {
+    width: 100%;
+    height: 250px;
+  }
+</style>
+
+<div class="row">
+  <div id="grid1" ui-grid="{data:myData}" class="myGrid"></div>
+   <h2>Forms</h2>
+  <pre>{{myData | json}}</pre>
 </div>

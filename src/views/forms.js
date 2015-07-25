@@ -1,41 +1,27 @@
 'use strict';
 
-angular.module('regApp.forms', ['ngRoute'])
+angular.module('regApp.forms', ['ngRoute','ui.grid'])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/views/forms', {
     templateUrl: 'views/forms.html',
-    controller: 'FormCtrl'
+    controller: 'FormsCtrl'
   });
 }])
-.controller('FormCtrl', [function() {
-  var vm = this;
+.controller('FormsCtrl', function($http, $scope) {
+  
+  $http.get('/showForm').success(function(data) {
+    console.log("is here");
 
-  vm.model = {};
-  vm.fields = [
-    {
-      type: 'input',
-      key: 'text',
-      templateOptions: {
-        label: 'First input',
-        placeholder: 'It works!'
-      }
-    },
-    {
-      type: 'select',
-      key: 'avenger',
-      templateOptions: {
-        label: 'Favorite Avenger',
-        options: [
-          {name: 'Iron Man', value: 'iron_man', gender: 'Male'},
-          {name: 'Captain America', value: 'captain_america', gender: 'Male'},
-          {name: 'Black Widow', value: 'black_widow', gender: 'Female'},
-          {name: 'Hulk', value: 'hulk', gender: 'Male'},
-          {name: 'Captain Marvel', value: 'captain_marvel', gender: 'Female'}
-        ],
-        groupProp: 'gender'
-      }
-    }
-  ];
-}]);
+    var fields = data;
+
+    $scope.myData = fields.map(function (obj) {
+        return {"id":obj.id, "title":obj.title, "createdAt":obj.createdAt, "updatedAt":obj.updatedAt};
+    });
+
+
+  });
+    
+
+});
 
  

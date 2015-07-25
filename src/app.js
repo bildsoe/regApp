@@ -1,27 +1,73 @@
 var express = require('express');
 var app = express();
-var Sequelize = require('sequelize')
-  , sequelize = new Sequelize('regApp', 'postgres', '1234', {
-      dialect: 'postgres',
-      port:    5432
+var pg = require('pg');
+
+var bodyParser = require('body-parser');
+
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+var connectionString = 'postgres://postgres:1234@localhost:5432/regApp';
+
+var showForm = (req, res) => {
+
+  var forms = [];
+
+  pg.connect(connectionString, (err, client, done) => {
+  
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+
+    // SQL Query > Select Data
+    var query = client.query('SELECT * FROM reg1.form1');
+
+    // Stream results back one row at a time
+    query.on('row', function(row) {
+        forms.push(row);
     });
 
-sequelize
-  .authenticate()
-  .then((err) => {
-    console.log('Connection has been established successfully.');
-  }, (err) => { 
-    console.log('Unable to connect to the database:', err);
+    // After all data is returned, close connection and return results
+    query.on('end', function() {
+        client.end();
+        return res.json(forms);
+    });
+
   });
+  
+};
 
-console.log(__dirname);
 
+console.log('logged into db');
+
+//Set up static directory for serving static html
 app.use(express.static(__dirname + '/public'));
 
-app.get('/test', (req, res) => {
-  res.send('hello world');
+
+var router = express.Router();
+
+router.use(function(req, res, next) {
+  // do logging
+  console.log('Something is happening.');
+  next(); // make sure we go to the next routes and don't stop here
 });
 
-console.log("Server startet on port 3000");
+router.route('/showForm')
+  .get(showForm);
+
+router.route('/test')
+  .get((req, res) => {
+    res.send('hello world');
+  });
+
+
+app.use('/', router);
+
 
 app.listen(3000);
+console.log('Server startet on port 3000');
+
+
+
