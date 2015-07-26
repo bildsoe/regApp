@@ -6,7 +6,7 @@
 </style>
 
 <div class="row">
-  <div id="grid1" ui-grid="{data:myData}" class="myGrid"></div>
+  <div id="grid1" ui-grid="myGridOptions" ui-grid-selection ui-grid-resize-columns class="myGrid"></div>
    <h2>Forms</h2>
-  <pre>{{myData | json}}</pre>
+  <pre>{{myGridOptions.data | json}}</pre>
 </div>
